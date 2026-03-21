@@ -1,0 +1,7 @@
+backend/venv/
+backend/outputs/
+__pycache__/
+*.pyc
+.DS_Store
+backend/models/saved_weights/*.pth
+backend/models/saved_weights/*.h5
