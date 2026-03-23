@@ -106,6 +106,29 @@ def extract_board(image_path):
     
     return warped_board, warped_gray
 
+"""
+Slice 9x9 Sudoku grid into 81 individual cell images
+"""
+def split_boxes(warped_image):
+
+    # make image dimensions divisible by 9
+    side = warped_image.shape[0]
+    side = side - (side % 9) 
+    warped_image = cv2.resize(warped_image, (side, side))
+    
+    # split image vertically into 9 rows, then into 9 columns
+    rows = np.vsplit(warped_image, 9)
+    boxes = []
+    
+    for row in rows:
+        cols = np.hsplit(row, 9)
+        for box in cols:
+            # crop a few pixels off all 4 sides of the box to remove thick grid lines
+            box = box[4:-4, 4:-4] 
+            boxes.append(box)
+            
+    return boxes 
+
 
 if __name__ == "__main__":
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -125,6 +148,17 @@ if __name__ == "__main__":
         cv2.imwrite(color_path, color_board)
         cv2.imwrite(gray_path, gray_board)
 
+        boxes = split_boxes(gray_board)
+        
+        # create folder just for the slices
+        slices_dir = os.path.join(output_dir, "slices")
+        os.makedirs(slices_dir, exist_ok=True)
+        
+        for i, box in enumerate(boxes):
+            box_path = os.path.join(slices_dir, f"box_{i}.jpg")
+            cv2.imwrite(box_path, box)
+            
+        print(f"Saved 81 individual cells to: {slices_dir}")
         print(f"Saved color board to: {color_path}")
         print(f"Saved gray board to: {gray_path}")
     except Exception as e:
