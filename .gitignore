@@ -5,3 +5,4 @@ __pycache__/
 .DS_Store
 backend/models/saved_weights/*.pth
 backend/models/saved_weights/*.h5
+backend/models/dataset/
