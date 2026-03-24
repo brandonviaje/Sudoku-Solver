@@ -83,6 +83,8 @@ def solve_sudoku(board: List[List[int]]):
             if val == 0:
                 empty_cells.append((r, c))
             else:
+                if val in rows[r] or val in cols[c] or val in boxes[box_index(r, c)]:
+                    return False
                 rows[r].add(val)
                 cols[c].add(val)
                 boxes[box_index(r, c)].add(val)
