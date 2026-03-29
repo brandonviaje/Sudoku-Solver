@@ -20,6 +20,15 @@ git clone https://github.com/brandonviaje/sudoku-solver.git
 pip install -r requirements.txt
 ```
 
+## Tech Stack
+
+- Python
+- OpenCV
+- PyTorch
+- Render
+- Vercel
+- React
+
 ## Deployed
 
 This is also deployed on a webpage found here (link).
