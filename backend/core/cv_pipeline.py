@@ -125,6 +125,8 @@ def split_boxes(warped_image):
         for box in cols:
             # crop a few pixels off all 4 sides of the box to remove thick grid lines
             box = box[4:-4, 4:-4] 
+            box = cv2.resize(box, (28, 28))
+            _, box = cv2.threshold(box, 128, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
             boxes.append(box)
             
     return boxes 
