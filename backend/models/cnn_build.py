@@ -32,4 +32,3 @@ if __name__ == "__main__":
     
     print(f"Model Architecture:\n{model}")
     print(f"\nOutput shape: {output.shape} -> (Batch Size, Number of Classes)")
-    print("If output shape is [5, 10], the network is perfectly configured!")
